@@ -19,7 +19,6 @@ class Hand:
             if c in suit.keys():
                 for i in temp:
                     suit[c][i] += 1
-                print(temp)
                 temp = []
 
     def hand_to_s(self):
