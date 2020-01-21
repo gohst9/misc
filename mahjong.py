@@ -52,5 +52,6 @@ def main():
     pass
 
 if __name__ == '__main__':
+    s = input("123m456p789s形式で麻雀の手牌を入力してください")
     hand = Hand("231546m798s11p")
     hand.show()
