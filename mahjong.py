@@ -19,24 +19,26 @@ class Hand:
             if c in suit.keys():
                 for i in temp:
                     suit[c][i] += 1
+                print(temp)
                 temp = []
 
     def hand_to_s(self):
         s = ""
         hand = ""
+
         for i,n in enumerate(self.pinzu):
             s = s + str(i) * int(n)
-        hand = hand + s + "p" if len(s) > 0 else ""
+        hand = hand + s + ("p" if len(s) > 0 else "")
         s = ""
 
         for i,n in enumerate(self.souzu):
             s = s + str(i) * int(n)
-        hand = hand + s + "s" if len(s) > 0 else ""
+        hand = hand + s + ("s" if len(s) > 0 else "")
         s = ""
 
         for i,n in enumerate(self.manzu):
             s = s + str(i) * int(n)
-        hand = hand + s + "m" if len(s) > 0 else ""
+        hand = hand + s + ("m" if len(s) > 0 else "")
         s = ""
 
         return hand
