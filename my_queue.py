@@ -37,7 +37,13 @@ class Queue:
 
 
 def main():
-    pass
+    q = Queue()
+    for i in [1,2,3]:
+        q.push(i)
+
+    for i in range(3):
+        print(q.pop())
+        #先入れ先出しで「1,2,3」の順番で出力される
 
 if __name__ == '__main__':
     main()
