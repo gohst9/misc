@@ -7,7 +7,7 @@ def main():
 
 
 def dfs(n):
-    #counter = 0
+    counter = 0
     arrows = "↑→↓←"
     d = deque()
     d.append("")
