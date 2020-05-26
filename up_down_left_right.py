@@ -2,11 +2,11 @@ from collections import deque
 
 def main():
     n = int(input())
-    for answer in dfs(n):
+    for answer in bfs(n):
         print(answer)
 
 
-def dfs(n):
+def bfs(n):
     counter = 0
     arrows = "↑→↓←"
     d = deque()
