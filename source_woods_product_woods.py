@@ -12,6 +12,8 @@ def main():
     products = list(map(int,input().split())) #作りたい木材
     products.sort()
     while products and source_woods: #作る必要のある木材が存在する間
+        print("source woods:",source_woods)
+        print("products:",products)
         source_wood = -heapq.heappop(source_woods)
         product = products.pop()
         if product <= source_wood:
@@ -21,7 +23,7 @@ def main():
             break
 
         if source_wood > 0: #材料の木がまだ残っているときは優先度付きキューである原材料リストに戻す
-            heapq.heappush(source_woods,source_wood)
+            heapq.heappush(source_woods,-source_wood)
 
     if len(products) > 0:
         print("No")
