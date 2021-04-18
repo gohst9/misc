@@ -46,7 +46,7 @@ class Body:
 
 class App:
     def __init__(self):
-        pyxel.init(160, 120)
+        pyxel.init(120, 80)
         self.head = Body(pyxel.width//2,pyxel.height//2)
         self.is_game_over = False
         #エサの初期配置
