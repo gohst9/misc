@@ -1,11 +1,13 @@
 #todo
-#衝突判定
+#衝突判定 done
+#壁衝突判定
 #エサを食べる
 # ↓
 #スコア
 #エサのランダム配置
 
 import pyxel
+import random
 
 class Body:
     def __init__(self,x,y,tail = None):
@@ -45,22 +47,29 @@ class App:
         pyxel.init(160, 120)
         self.head = Body(pyxel.width//2,pyxel.height//2)
         self.is_game_over = False
-        for i in range(10):
-            self.head = Body(self.head.x+1,self.head.y,self.head) #新しい頭を作って、既存の頭を新しい頭の尻尾にする
+        #エサの初期配置
+        self.food_x = random.randint(0,pyxel.width)
+        self.food_y = random.randint(0,pyxel.height)
+        self.dx = 0
+        self.dy = 0
+
 
         pyxel.run(self.update, self.draw)
 
+    def draw_food(self):
+        pyxel.rect(self.food_x,self.food_y,1,1,1)
+
     def update(self):
-        dx,dy = 0,0
-        #move
+        self.dx,self.dy = 0,0 #デバッグ用
+        #入力受け取り
         if pyxel.btn(pyxel.KEY_LEFT):
-            dx,dy = -1,0
+            self.dx,self.dy = -1,0
         elif pyxel.btn(pyxel.KEY_RIGHT):
-            dx,dy = 1,0
+            self.dx,self.dy = 1,0
         elif pyxel.btn(pyxel.KEY_UP):
-            dx,dy = 0,-1
+            self.dx,self.dy = 0,-1
         elif pyxel.btn(pyxel.KEY_DOWN):
-            dx,dy = 0,1
+            self.dx,self.dy = 0,1
         elif pyxel.btnp(pyxel.KEY_SPACE):
             print(self.head.get_positions())
 
@@ -70,14 +79,26 @@ class App:
             self.is_game_over = True
         else:
             self.is_game_over = False
-        self.head.move(dx,dy)
 
 
+        #壁衝突判定
+        if self.head.x < 0 or self.head.x > pyxel.width or self.head.y < 0 or self.head.y > pyxel.height:
+            self.is_game_over = True
+
+        #エサを食べられるかどうかの判定
+        if self.head.x + self.dx == self.food_x and self.head.y + self.dy == self.food_y:
+            self.head = Body(self.head.x+self.dx,self.head.y+self.dy,self.head)
+            self.food_x = random.randint(0,pyxel.width)
+            self.food_y = random.randint(0,pyxel.height)
+
+
+        self.head.move(self.dx,self.dy)
 
     def draw(self):
         pyxel.cls(0)
         if self.is_game_over:
             pyxel.text(0,0,"game over",10)
         self.head.draw()
+        self.draw_food()
 
 App()
