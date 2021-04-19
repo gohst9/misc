@@ -58,12 +58,16 @@ class App:
         pyxel.run(self.update, self.draw)
 
     def draw_food(self):
-        pyxel.rect(self.food_x,self.food_y,1,1,BODY_COLOR)
+        pyxel.rect(self.food_x,self.food_y,1,1,8)
 
     def update(self):
         #ゲームスピード調整
         if pyxel.frame_count % 2 != 0:
-            return
+            #スペースキー押してる間は高速化（低速化を無視）
+            if pyxel.btn(pyxel.KEY_SPACE):
+                pass
+            else:
+                return
 
         #self.dx,self.dy = 0,0 #デバッグ用
 
@@ -91,8 +95,7 @@ class App:
             self.dx,self.dy = 0,-1
         elif pyxel.btn(pyxel.KEY_DOWN):
             self.dx,self.dy = 0,1
-        elif pyxel.btnp(pyxel.KEY_SPACE):
-            print(self.head.get_positions())
+
 
 
         #自身への衝突判定
