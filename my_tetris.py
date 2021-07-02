@@ -1,5 +1,7 @@
 import pyxel
 
+dot = 20
+
 shapes =[[[0,0,0,0],
           [0,1,0,0],
           [1,1,1,0],
@@ -66,7 +68,7 @@ class Board:
         for i in range(self.height):
             for j in range(self.width):
                 if self.board[i][j]:
-                    pyxel.rect(j,i,1,1,9)
+                    pyxel.rect(j*dot,i*dot,dot,dot,9)
 
 
     def create_new_block(self):
@@ -121,9 +123,9 @@ class Block:
             for j in range(self.width):
                 if not self.shape[i][j]:
                     continue
-                draw_x = self.x + j
-                draw_y = self.y + i
-                pyxel.rect(draw_x,draw_y,1,1,9)
+                draw_x = self.x * dot + j * dot
+                draw_y = self.y * dot + i * dot
+                pyxel.rect(draw_x,draw_y,dot,dot,9)
 
     def fall(self):
         self.y += 1
@@ -173,7 +175,7 @@ def delete_full_line(board):
 
 class App:
     def __init__(self):
-        pyxel.init(WIDTH, HEIGHT)
+        pyxel.init(WIDTH*dot, HEIGHT*dot)
         self.board = Board(WIDTH,HEIGHT)
         pyxel.run(self.update, self.draw)
 
@@ -187,7 +189,7 @@ class App:
     def draw(self):
         pyxel.cls(0)
         if self.board.game_over:
-            pyxel.text(0,0,"><",7)
+            pyxel.text(0,0,"GAME OVER,SCORE:"+str(self.board.score),7)
             return
 
         self.board.draw()
