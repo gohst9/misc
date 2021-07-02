@@ -90,7 +90,17 @@ class Block:
         return True
 
 
-
+def delete_full_line(board):
+    del_count = 0
+    new_board = []
+    for line in board:
+        #1行全て埋まっているとき消去（新しいボードに行を追加しない）
+        if all(line):
+            del_count += 1
+        else:
+            new_board.append(line)
+    board = new_board #ボードを新しいボードに差し替え
+    return del_count #消した行の数を返却（スコア計算用）
 
 
 
