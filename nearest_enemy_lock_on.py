@@ -68,7 +68,7 @@ class Enemy:
     def update(self,is_nearest=False):
         self.color = 14
         if is_nearest:
-            self.color = 8
+            self.color = 12
 
         dx = random.randint(-1,1)
         dy = random.randint(-1,1)
@@ -80,5 +80,11 @@ class Enemy:
 
     def distance_from(self,player):
         return (player.x - self.x) ** 2  + (player.y - self.y) ** 2
+
+    def __lt__(self,other):
+        return id(self) < id(other)
+
+    def __gt__(self,other):
+        return id(self) > id(other)
 
 App()
