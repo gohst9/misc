@@ -34,8 +34,8 @@ class Bullet(Object):
 
 class Enemy(Object):
     def update(self):
-        self.x += self.dx
-        self.y += self.dy
+        self.x = min(pyxel.width,max(0,self.x + self.dx))
+        self.y += min(pyxel.height,max(0,self.y + self.dy))
         self.dx = random.randint(-1,1)
         self.dy = random.randint(-1,1)
 
