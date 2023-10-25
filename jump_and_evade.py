@@ -78,8 +78,8 @@ class App:
             return
         self.player.update()
         self.player.damaged = False
-        if len(self.enemy_lst) <= 10 and pyxel.frame_count%10==0:
-            direction = random.randint(0,2)
+        if len(self.enemy_lst) <= 15 and pyxel.frame_count%10==0:
+            direction = random.randint(0,3)
             if direction == 0:
                 x = pyxel.width-1
                 y = random.randint(0,pyxel.height-1)
@@ -95,6 +95,13 @@ class App:
                 y = random.randint(0,pyxel.height-1)
                 dx = 1
                 dy = 0
+
+            elif direction == 3:
+                x = pyxel.width-1
+                y = pyxel.height - 1
+                dx = -1
+                dy = 0
+
             self.enemy_lst.append(Enemy(x,y,dx,dy))
         
         for i,enemy in enumerate(self.enemy_lst):
