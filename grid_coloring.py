@@ -21,6 +21,7 @@ class App:
     
     def update(self):
         if not pyxel.btn(pyxel.KEY_SPACE):
+            #スペースキーを押している間だけ色塗りを進行する
             return
         if self.y >= self.h:
             return
